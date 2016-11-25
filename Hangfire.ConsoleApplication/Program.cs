@@ -33,7 +33,10 @@ namespace Hangfire.ConsoleApplication
                     {
                         BackgroundJob.Enqueue(() => Console.WriteLine("{0} Background job completed successfully!", DateTime.Now.ToString()));
                     }
+
                 }
+
+                BackgroundJob.Schedule(() => Console.WriteLine("{0}  BackgroundJob.Schedule completed successfully!"), TimeSpan.FromSeconds(5));
             }
         }
     }

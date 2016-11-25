@@ -1,7 +1,9 @@
 ﻿using System;
-using Hangfire.SqlServer;
+//using Hangfire.SqlServer;
+using Hangfire.Mongo;
 using Microsoft.Owin;
 using Owin;
+
 
 [assembly: OwinStartup(typeof(Hangfire.ConsoleApplication.Startup))]
 
@@ -14,10 +16,10 @@ namespace Hangfire.ConsoleApplication
             app.UseErrorPage();
             app.UseWelcomePage("/");
 
-            GlobalConfiguration.Configuration.UseSqlServerStorage(
-                "DefaultConnection",
-                new SqlServerStorageOptions { QueuePollInterval = TimeSpan.FromSeconds(1) });
-
+            //GlobalConfiguration.Configuration.UseSqlServerStorage(
+            //    "DefaultConnection",
+            //    new SqlServerStorageOptions { QueuePollInterval = TimeSpan.FromSeconds(1) });
+            GlobalConfiguration.Configuration.UseMongoStorage("mongodb://localhost", "HanfireConsoleDemo");
             app.UseHangfireDashboard();
             app.UseHangfireServer();
 
